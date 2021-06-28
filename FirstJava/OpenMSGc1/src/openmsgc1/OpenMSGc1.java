@@ -36,6 +36,9 @@ public class OpenMSGc1 {
         client.startConnection();
     }
     
+    void endConnection(){
+        System.out.println("ENDED");
+    }
     void startConnection(){
         try{
             CSocket = new Socket(IPAddress, 6666);
@@ -45,7 +48,7 @@ public class OpenMSGc1 {
     }
 
     void sendMessage(){
-        System.out.println("hello");        
+        System.out.println("hello sam");        
     }
 }
 
