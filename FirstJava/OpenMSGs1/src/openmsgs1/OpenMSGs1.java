@@ -18,4 +18,11 @@ public class OpenMSGs1 {
         // TODO code application logic here
     }
     
+    public static void Car(){
+    
+}
+    
+    
+    
+    
 }
