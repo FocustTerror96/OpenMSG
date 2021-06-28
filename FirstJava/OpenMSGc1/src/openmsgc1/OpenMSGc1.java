@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.net.*;
 import com.dosse.upnp.UPnP; // Inport WaifUPnP Library
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 /**
  *
  * @author sgmud
@@ -19,7 +21,9 @@ public class OpenMSGc1 {
     private String username="";
     private String IPAddress="";
     private Integer Port;
-    public Socket CSocket;
+    public Socket clientSocket;
+    public PrintWriter output; // writes to the socket
+    public BufferedReader input; // reads data coming into the socket
     /**
      * @param args the command line arguments
      */
@@ -54,13 +58,22 @@ public class OpenMSGc1 {
     void endConnection(){
         System.out.println("ENDED");
     }
+    
     void startConnection(){
         try{
-            CSocket = new Socket(IPAddress, Port);
+            clientSocket = new Socket(IPAddress, Port);
+            output = new PrintWriter(clientSocket.getOutputStream());
+            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            client.sendMessage();
         }catch(IOException e) {
-            System.out.println("1");
+            System.out.println("Connection failed!");
         }
     }
 
+    void sendMessage(){
+        System.out.println("Please enter the message you wish to send: ");
+        String message = scan.nextLine();
+        output.println(message);
+    }
 }
 
