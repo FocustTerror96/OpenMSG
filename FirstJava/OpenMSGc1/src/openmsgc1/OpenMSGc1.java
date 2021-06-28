@@ -18,4 +18,8 @@ public class OpenMSGc1 {
         // TODO code application logic here
     }
     
+    void sendMessage(){
+        System.out.println("hello")
+        
+    }
 }
