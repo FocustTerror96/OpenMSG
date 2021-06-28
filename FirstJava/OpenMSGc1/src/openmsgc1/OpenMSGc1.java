@@ -44,7 +44,10 @@ public class OpenMSGc1 {
         }catch(IOException e) {
             System.out.println("1");
         }
-        
+    }
+
+    void sendMessage(){
+        System.out.println("hello");        
     }
 }
 
