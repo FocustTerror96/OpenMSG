@@ -8,7 +8,7 @@ package openmsgc1;
 import java.io.IOException;
 import java.util.Scanner;
 import java.net.*;
-
+import com.dosse.upnp.UPnP; // Inport WaifUPnP Library
 /**
  *
  * @author sgmud
@@ -18,6 +18,7 @@ public class OpenMSGc1 {
     static OpenMSGc1 client = new OpenMSGc1();
     private String username="";
     private String IPAddress="";
+    private Integer Port;
     public Socket CSocket;
     /**
      * @param args the command line arguments
@@ -28,12 +29,26 @@ public class OpenMSGc1 {
     }
     
     void setup(){
+        client.getUsername();
+        client.getIPAddress();
+        client.getPort();
+        client.startConnection();
+        
+    }
+    
+    void getUsername(){
         System.out.println("Please enter your desired username: ");
         username = scan.nextLine();
+    }
+    
+    void getIPAddress(){
         System.out.println("Please enter the ip of your target server: ");
         IPAddress = scan.nextLine();
-        System.out.println(username+IPAddress);
-        client.startConnection();
+    }
+    
+    void getPort(){
+        System.out.println("Please enter the port of your target server: ");
+        Port = scan.nextInt();
     }
     
     void endConnection(){
@@ -41,14 +56,11 @@ public class OpenMSGc1 {
     }
     void startConnection(){
         try{
-            CSocket = new Socket(IPAddress, 6666);
+            CSocket = new Socket(IPAddress, Port);
         }catch(IOException e) {
             System.out.println("1");
         }
     }
 
-    void sendMessage(){
-        System.out.println("hello sam");        
-    }
 }
 
