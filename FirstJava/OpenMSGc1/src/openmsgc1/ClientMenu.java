@@ -30,7 +30,7 @@ public class ClientMenu {
         return IPAddress;
     }
     
-    String getMessage(){
+    public String getMessage(){
         while(true){
         System.out.println("Please enter the message you wish to send: ");
         message=scan.nextLine();

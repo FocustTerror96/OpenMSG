@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.net.*;
 import com.dosse.upnp.UPnP; // Inport WaifUPnP Library
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 /**
@@ -47,7 +48,7 @@ public class OpenMSGc1 {
     void startConnection(){
         try{
             clientSocket = new Socket(IPAddress, port);
-            output = new PrintWriter(clientSocket.getOutputStream());
+            
             input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             
             client.sendMessage();
@@ -57,12 +58,14 @@ public class OpenMSGc1 {
         }
     }
 
-    void sendMessage(){
+    void sendMessage() throws IOException{
+        output = new PrintWriter(clientSocket.getOutputStream());
         while(true){
-        String message = menu.getMessage();
-        output.println(message);
-        System.out.println("Do you want to send another message (y/n)");
-        String choice = scan.nextLine();
+            String message = "dilan likes poo";
+        
+            output.println(message);
+            System.out.println("Do you want to send another message (y/n)");
+            String choice = scan.nextLine();
         if(choice=="n"){
             break;
         }
