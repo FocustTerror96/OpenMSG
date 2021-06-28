@@ -19,7 +19,7 @@ public class OpenMSGc1 {
     }
     
     void sendMessage(){
-        System.out.println("hello")
+        System.out.println("hello");
         
     }
 }
