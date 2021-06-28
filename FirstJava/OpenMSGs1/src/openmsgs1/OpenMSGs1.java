@@ -11,6 +11,9 @@ import java.util.Scanner;
 import java.net.*; // Import javas networking library
 import java.io.*; // Import javas input output librarys
 import com.dosse.upnp.UPnP; // Inport WaifUPnP Library
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 /**
  *
  * @author sgmud
@@ -23,6 +26,9 @@ public class OpenMSGs1{
     public Socket CSocket; // Socket will be created with a successfull conection between programs
     public int PortNumber;
     public static OpenMSGs1 server = new OpenMSGs1();
+    private static ArrayList<ClientHandler> clients = new ArrayList<>();
+    private static ExecutorService Serv = Executors.newFixedThreadPool(10);
+    
     /**
      * @param args the command line arguments
      */
@@ -33,6 +39,11 @@ public class OpenMSGs1{
      server.GetPort();
     }
           
+    
+    
+    
+    
+    
     
     
     public void GetPort(){
@@ -47,8 +58,16 @@ public class OpenMSGs1{
         try{
         UPnP.openPortTCP(PortNumber); // WaifUPnP library auto port forwards this port on your router
         SSocket = new ServerSocket(PortNumber); // Takes the port the user enters and starts a server socket with it
-        CSocket = SSocket.accept(); // When A client trys to connect to the server a socket is made 
-        System.out.println("Cleint Connected");
+        while(true){
+            System.out.println("Waiting For Connection...");
+            CSocket = SSocket.accept(); // When A client trys to connect to the server a socket is made 
+            System.out.println(" Connected to Client...");
+            ClientHandler clientThread = new ClientHandler(CSocket);
+            clients.add(clientThread);
+            
+            Serv.execute(clientThread);
+        }
+        
         }catch(IOException e){ // Catches the error as variable e
             System.out.println("ERROR"); // Prints error if there is an error
             
