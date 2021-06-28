@@ -18,41 +18,26 @@ import java.io.PrintWriter;
 public class OpenMSGc1 {
     Scanner scan = new Scanner(System.in);
     static OpenMSGc1 client = new OpenMSGc1();
+    static ClientMenu menu = new ClientMenu();
     private String username="";
     private String IPAddress="";
-    private Integer Port;
+    private Integer port;
     public Socket clientSocket;
     public PrintWriter output; // writes to the socket
     public BufferedReader input; // reads data coming into the socket
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) { 
         client.setup();
     }
     
     void setup(){
-        client.getUsername();
-        client.getIPAddress();
-        client.getPort();
+        username=menu.getUsername();
+        IPAddress=menu.getIPAddress();
+        port=menu.getPort();
         client.startConnection();
         
-    }
-    
-    void getUsername(){
-        System.out.println("Please enter your desired username: ");
-        username = scan.nextLine();
-    }
-    
-    void getIPAddress(){
-        System.out.println("Please enter the ip of your target server: ");
-        IPAddress = scan.nextLine();
-    }
-    
-    void getPort(){
-        System.out.println("Please enter the port of your target server: ");
-        Port = scan.nextInt();
     }
     
     void endConnection(){
@@ -61,19 +46,31 @@ public class OpenMSGc1 {
     
     void startConnection(){
         try{
-            clientSocket = new Socket(IPAddress, Port);
+            clientSocket = new Socket(IPAddress, port);
             output = new PrintWriter(clientSocket.getOutputStream());
             input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            
             client.sendMessage();
+            
         }catch(IOException e) {
             System.out.println("Connection failed!");
         }
     }
 
     void sendMessage(){
-        System.out.println("Please enter the message you wish to send: ");
-        String message = scan.nextLine();
+        while(true){
+        String message = menu.getMessage();
         output.println(message);
+        System.out.println("Do you want to send another message (y/n)");
+        String choice = scan.nextLine();
+        if(choice=="n"){
+            break;
+        }
+        }
     }
+    
+    //void sendData(){
+    //    String data = ""
+    //}
 }
 
