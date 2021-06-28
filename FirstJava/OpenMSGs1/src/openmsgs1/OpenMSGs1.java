@@ -16,10 +16,6 @@ import java.io.*; // Import javas input output librarys
  */
 
 
-
-
-
-
 public class OpenMSGs1{
     public Scanner scan = new Scanner(System.in);
     public ServerSocket SSocket; // Serversocket is used to listen for incoming connections
@@ -27,10 +23,7 @@ public class OpenMSGs1{
     /**
      * @param args the command line arguments
      */
-    
-   
-    
-    
+      
     
     public static void main(String[] args) {
      OpenMSGs1 server = new OpenMSGs1();

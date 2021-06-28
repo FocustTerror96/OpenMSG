@@ -15,6 +15,7 @@ import java.net.*;
  */
 public class OpenMSGc1 {
     Scanner scan = new Scanner(System.in);
+    static OpenMSGc1 client = new OpenMSGc1();
     private String username="";
     private String IPAddress="";
     public Socket CSocket;
@@ -22,20 +23,17 @@ public class OpenMSGc1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        OpenMSGc1 client = new OpenMSGc1();
+        
         client.setup();
     }
     
     void setup(){
-        try{
-            System.out.println("Please enter your desired username: ");
-            username = scan.nextLine();
-            System.out.println("Please enter the ip of your target server: ");
-            IPAddress = scan.nextLine();
-            System.out.println(username+ipAddress);
-        } catch(IOException e) {
-            System.out.println("1");
-        }
+        System.out.println("Please enter your desired username: ");
+        username = scan.nextLine();
+        System.out.println("Please enter the ip of your target server: ");
+        IPAddress = scan.nextLine();
+        System.out.println(username+IPAddress);
+        client.startConnection();
     }
     
     void startConnection(){
