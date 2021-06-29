@@ -43,9 +43,9 @@ public class ClientHandler implements Runnable{
             
             while(true){
                 message = in.readLine();
-                if(message.equals("")){
+                
                     outToAll(message);
-                }
+                
             }
         }catch(IOException e){
             System.err.println(e.getStackTrace());
