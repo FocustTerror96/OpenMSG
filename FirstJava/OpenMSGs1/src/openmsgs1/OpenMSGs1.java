@@ -64,7 +64,7 @@ public class OpenMSGs1{
             System.out.println("Waiting For Connection...");
             CSocket = SSocket.accept(); // When A client trys to connect to the server a socket is made 
             System.out.println(" Connected to Client...");
-            ClientHandler clientThread = new ClientHandler(CSocket);
+            ClientHandler clientThread = new ClientHandler(CSocket, clients);
             clients.add(clientThread);
             
             Serv.execute(clientThread);

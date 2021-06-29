@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,9 +22,11 @@ public class ClientHandler implements Runnable{
     private Socket client;
     public BufferedReader in;
     public PrintWriter out;
+    public ArrayList<ClientHandler> clients;
     
-    public ClientHandler(Socket clientSocket) throws IOException {
+    public ClientHandler(Socket clientSocket, ArrayList<ClientHandler> Clients) throws IOException {
         this.client = clientSocket;
+        this.clients = Clients;
     
     
     
@@ -33,13 +36,16 @@ public class ClientHandler implements Runnable{
     public void run(){
         in = null;
         out = null;
-        
+        String message = null;
         try{
             this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            this.out = new PrintWriter(client.getOutputStream());
+            this.out = new PrintWriter(client.getOutputStream(), true);
+            
             while(true){
-                String request = in.readLine();
-                System.out.println(request);
+                message = in.readLine();
+                if(message.equals("")){
+                    outToAll(message);
+                }
             }
         }catch(IOException e){
             System.err.println(e.getStackTrace());
@@ -52,6 +58,13 @@ public class ClientHandler implements Runnable{
             }
         }
              
+    }
+
+        public void outToAll(String message) {
+            
+            for(ClientHandler AClient : clients){
+                AClient.out.println(message);
+        }
     }
     
     
