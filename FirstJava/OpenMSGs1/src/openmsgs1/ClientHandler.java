@@ -24,14 +24,14 @@ public class ClientHandler implements Runnable{
     
     public ClientHandler(Socket clientSocket) throws IOException {
         this.client = clientSocket;
-        in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        out = new PrintWriter(client.getOutputStream());
-        run();
+        this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        this.out = new PrintWriter(client.getOutputStream());
     
     
     
     }
     
+    @Override
     public void run(){
         
         try{
