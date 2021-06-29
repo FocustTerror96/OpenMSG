@@ -38,7 +38,6 @@ public class ClientHandler implements Runnable{
             this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             this.out = new PrintWriter(client.getOutputStream());
             while(true){
-                System.out.println("dilan");
                 String request = in.readLine();
                 System.out.println(request);
             }

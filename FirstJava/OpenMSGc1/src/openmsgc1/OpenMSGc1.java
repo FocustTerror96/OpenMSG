@@ -64,10 +64,11 @@ public class OpenMSGc1 {
     void sendMessage() throws IOException{
         output = null;
         output = new PrintWriter(clientSocket.getOutputStream(), true);
+        ClientMenu menu = new ClientMenu();
         while(true){
-            String message = "dilan likes poo";
-        
+            String message = menu.getMessage();
             output.println(message);
+            System.out.println(message);
             System.out.println("Do you want to send another message (y/n)");
             String choice = scan.nextLine();
         if(choice=="n"){
