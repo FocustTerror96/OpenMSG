@@ -81,6 +81,7 @@ public class OpenMSGc1 {
         
         
         try{
+            
             e.LoadPublicKey("RSA/publickey");
             clientSocket = new Socket(IPAddress, port);
             ClientReceiver receiverThread = new ClientReceiver(clientSocket);
