@@ -73,12 +73,8 @@ public class OpenMSGc1 {
         while(true){
             String message = menu.getMessage();
             output.println(message);
-            System.out.println(message);
-            System.out.println("Do you want to send another message (y/n)");
-            String choice = scan.nextLine();
-        if(choice=="n"){
-            break;
-        }
+            // System.out.println(message);
+            
         }
     }
     
