@@ -12,6 +12,8 @@ import com.dosse.upnp.UPnP; // Inport WaifUPnP Library
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 /**
  *
  * @author sgmud
@@ -26,14 +28,15 @@ public class OpenMSGc1 {
     public Socket clientSocket;
     public PrintWriter output; // writes to the socket
     public BufferedReader input; // reads data coming into the socket
+    private static ExecutorService Serv = Executors.newFixedThreadPool(10);
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) { 
+    public static void main(String[] args) throws IOException { 
         client.setup();
     }
     
-    void setup(){
+    void setup() throws IOException{
         username=menu.getUsername();
         IPAddress=menu.getIPAddress();
         port=menu.getPort();
@@ -51,10 +54,12 @@ public class OpenMSGc1 {
         
         try{
             clientSocket = new Socket(IPAddress, port);
-            
+            ClientReceiver receiverThread = new ClientReceiver(clientSocket);
+            Serv.execute(receiverThread);
             input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             
             client.sendMessage();
+            
             
         }catch(IOException e) {
             System.out.println("Connection failed!");
