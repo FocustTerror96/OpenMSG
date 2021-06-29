@@ -54,6 +54,8 @@ public class OpenMSGs1{
 
     
     private void setup(){
+        
+        
         System.out.println("Server Starting...");
         try{
         UPnP.openPortTCP(PortNumber); // WaifUPnP library auto port forwards this port on your router

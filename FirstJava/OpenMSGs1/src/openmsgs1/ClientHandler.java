@@ -24,8 +24,6 @@ public class ClientHandler implements Runnable{
     
     public ClientHandler(Socket clientSocket) throws IOException {
         this.client = clientSocket;
-        this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        this.out = new PrintWriter(client.getOutputStream());
     
     
     
@@ -33,8 +31,12 @@ public class ClientHandler implements Runnable{
     
     @Override
     public void run(){
+        in = null;
+        out = null;
         
         try{
+            this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            this.out = new PrintWriter(client.getOutputStream());
             while(true){
                 System.out.println("dilan");
                 String request = in.readLine();

@@ -46,6 +46,9 @@ public class OpenMSGc1 {
     }
     
     void startConnection(){
+        clientSocket = null;
+        input = null;
+        
         try{
             clientSocket = new Socket(IPAddress, port);
             
@@ -59,7 +62,8 @@ public class OpenMSGc1 {
     }
 
     void sendMessage() throws IOException{
-        output = new PrintWriter(clientSocket.getOutputStream());
+        output = null;
+        output = new PrintWriter(clientSocket.getOutputStream(), true);
         while(true){
             String message = "dilan likes poo";
         
