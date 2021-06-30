@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
@@ -22,6 +23,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.NoSuchPaddingException;
+import javax.swing.JTextField;
 /**
  *
  * @author sgmud
@@ -48,21 +51,20 @@ public class OpenMSGc1 {
     }
     
     void setup() throws IOException, FileNotFoundException, GeneralSecurityException{
-        username=menu.getUsername();
-        IPAddress=menu.getIPAddress();
-        port=menu.getPort();
-        client.startConnection();
-        
+        ClientGUI gui = new ClientGUI();     
+        gui.setVisible(true);
     }
     
     void endConnection(){
         System.out.println("ENDED");
     }
     
-    void startConnection() throws FileNotFoundException, GeneralSecurityException{
+    void startConnection(String user, String IP, int prt) throws FileNotFoundException, GeneralSecurityException{
         clientSocket = null;
         input = null;
-        
+        username = user;
+        IPAddress = IP;
+        port = prt;
         if(k==0){    
             try {
                 e.KeyGeneration();
@@ -87,10 +89,6 @@ public class OpenMSGc1 {
             ClientReceiver receiverThread = new ClientReceiver(clientSocket);
             Serv.execute(receiverThread);
             input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            while (true){
-                String message = menu.getMessage();
-                client.sendMessage(e.Encrypt(message, Base64.getEncoder().encodeToString(Encryption.publicKey.getEncoded())));
-            }
             
         }catch(IOException e) {
             System.err.println(e);
@@ -98,7 +96,9 @@ public class OpenMSGc1 {
     }
 
     
-     public void sendMessage(byte[] msg) throws FileNotFoundException, GeneralSecurityException{ 
+     public void sendMessage(String msg) throws FileNotFoundException, GeneralSecurityException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IOException{ 
+        String message = msg;
+        byte[] encryptedMessage = e.Encrypt(message, Base64.getEncoder().encodeToString(Encryption.publicKey.getEncoded()));
         if(msg.equals("null")){
                 
                 
@@ -106,10 +106,10 @@ public class OpenMSGc1 {
         else{
             try{
             
-            System.out.print("Message After Encryption:"+Arrays.toString(msg));
+            System.out.print("Message After Encryption:"+Arrays.toString(encryptedMessage));
             f = clientSocket.getOutputStream();
             output = new PrintWriter(f, true);
-            String encodedmsg = new String(msg, "ISO-8859-1");
+            String encodedmsg = new String(encryptedMessage, "ISO-8859-1");
             System.out.print("Message After Encryption and encoding:"+ encodedmsg);
             output.println(encodedmsg);
             
