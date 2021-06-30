@@ -59,7 +59,7 @@ public class ClientReceiver implements Runnable{
                         Logger.getLogger(ClientReceiver.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                if(DecryptedMSG.equals("")==false){
+                if(DecryptedMSG.equals(null)==false){
                 System.out.println(DecryptedMSG);
                 
                 }
