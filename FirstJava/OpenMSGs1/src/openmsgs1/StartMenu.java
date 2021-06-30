@@ -124,6 +124,7 @@ public class StartMenu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         OpenMSGs1 server = new OpenMSGs1();
         String StringPort = jTextField1.getText();
+        System.out.println(StringPort);
         int testFail = 0;
         
         // 4 characters
@@ -142,7 +143,7 @@ public class StartMenu extends javax.swing.JFrame {
                 jLabel4.setText("<html><font color='red'>Please Enter Something</font></html>");
             }else{
                 if(Port<=9999 & Port>=1000){
-                   server.setup(); 
+                   server.setup(Port); 
                 }
                 else{
                     jLabel2.setText("<html><font color='red'>Please Enter a Port Thats Within Range</font></html>");
