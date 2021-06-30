@@ -36,7 +36,7 @@ public class OpenMSGs1{
     
     public static void main(String[] args) {
      
-     server.GetPort();
+     
     }
           
     
@@ -45,15 +45,15 @@ public class OpenMSGs1{
     
     
     
-    
+   /**
     public void GetPort(){
         System.out.println("Please Enter the Port");
         PortNumber = scan.nextInt();
         server.setup();
     }
-
+**/
     
-    private void setup(){
+    public void setup(){
         
         
         System.out.println("Server Starting...");
