@@ -40,7 +40,7 @@ public class OpenMSGc1 {
     public PrintWriter output; // writes to the socket
     public OutputStream f;
     public BufferedReader input; // reads data coming into the socket
-    private static ExecutorService Serv = Executors.newFixedThreadPool(10);
+    private static ExecutorService Serv = Executors.newFixedThreadPool(1);
     public Encryption e = new Encryption();
     public int k = 0;
     /**
@@ -71,7 +71,9 @@ public class OpenMSGc1 {
                 e.writeToFile("RSA/publickey", e.publicKey.getEncoded());
                 e.writeToFile("RSA/privatekey", e.privateKey.getEncoded());
                 k++;
-                
+                clientSocket = new Socket(IPAddress, port);
+                ClientReceiver receiverThread = new ClientReceiver(clientSocket);
+                Serv.execute(receiverThread);
             } catch (IOException ex) {
             Logger.getLogger(OpenMSGc1.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchAlgorithmException ex) {
@@ -84,9 +86,6 @@ public class OpenMSGc1 {
         
         try{
             
-            clientSocket = new Socket(IPAddress, port);
-            ClientReceiver receiverThread = new ClientReceiver(clientSocket);
-            Serv.execute(receiverThread);
             input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             
         }catch(IOException e) {
