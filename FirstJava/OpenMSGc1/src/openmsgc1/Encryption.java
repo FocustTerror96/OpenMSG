@@ -149,6 +149,7 @@ public class Encryption {
     
     public static String decrypt(byte[] data, PrivateKey privateKey) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IOException, BadPaddingException, IllegalBlockSizeException{
         // This decrypts the data and converts it into a readable form
+        System.out.println(data);
         Cipher cipher = Cipher.getInstance("RSA"); // creating a Cipher object that will be set into RSA mode so it can use my RSA keys
         cipher.init(Cipher.DECRYPT_MODE, privateKey); // Setting the Cipher object to decode and then giving it my private key
         return new String(cipher.doFinal(data)); // Converts the byte array into a readable string

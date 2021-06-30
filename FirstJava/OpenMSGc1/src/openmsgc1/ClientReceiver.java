@@ -48,10 +48,11 @@ public class ClientReceiver implements Runnable{
                 String DecryptedMSG = "";
                 
                 
-                if( request!=null){
+                if(request!=null){
                     System.out.println("Got to the if statement"); 
                     byte[] decodedmsg = request.getBytes(Charset.forName("ISO-8859-1")); // decodes message
                     try {
+                        System.out.println(request);
                         DecryptedMSG = e.decrypt(decodedmsg, e.privateKey); // decrypts message with users private key
                         System.out.println("Past line 55 on thread");
                     } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException ex) {
