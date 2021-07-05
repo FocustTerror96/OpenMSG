@@ -98,18 +98,18 @@ public class OpenMSGc1 {
         String message = msg;
         e.LoadPublicKey("RSA/publickey");
         byte[] encryptedMessage = e.Encrypt(message, Base64.getEncoder().encodeToString(Encryption.publicKey.getEncoded()));
-        if(msg.equals("null")){
+        if(msg.equals(null)){
                 
                 
         }        
         else{
             try{
             
-            System.out.print("Message After Encryption:"+Arrays.toString(encryptedMessage));
+            System.out.println("Message After Encryption:"+Arrays.toString(encryptedMessage));
             f = clientSocket.getOutputStream();
             output = new PrintWriter(f, true);
             String encodedmsg = new String(encryptedMessage, "ISO-8859-1");
-            System.out.print("Message After Encryption and encoding:"+ encodedmsg);
+            System.out.println("Message After Encryption and encoding:"+ encodedmsg);
             output.println(encodedmsg);
             
             
