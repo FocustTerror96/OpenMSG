@@ -111,7 +111,8 @@ public class OpenMSGc1 {
             String encodedmsg = new String(encryptedMessage, "ISO-8859-1");
             System.out.println("Message After Encryption and encoding:"+ encodedmsg);
             output.println(encodedmsg);
-            
+            f.flush();
+            output.flush();
             
             
             }catch (IOException e){

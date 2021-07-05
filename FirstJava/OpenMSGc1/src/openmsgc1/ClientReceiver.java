@@ -58,6 +58,8 @@ public class ClientReceiver implements Runnable{
                     } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException ex) {
                         Logger.getLogger(ClientReceiver.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }else{
+                    System.out.println("No request");
                 }
                 if(DecryptedMSG.equals(null)==false){
                 System.out.println(DecryptedMSG);
