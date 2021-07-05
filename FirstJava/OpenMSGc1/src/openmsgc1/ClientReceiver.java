@@ -21,7 +21,7 @@ import javax.crypto.NoSuchPaddingException;
 
 /**
  *
- * @author dylan
+ * @author sdadasd
  */
 public class ClientReceiver implements Runnable{
     private Socket client;
@@ -63,7 +63,7 @@ public class ClientReceiver implements Runnable{
                 }
                 if(DecryptedMSG.equals(null)==false){
                 System.out.println(DecryptedMSG);
-                
+                // Outputs message to user
                 }
                 
                 

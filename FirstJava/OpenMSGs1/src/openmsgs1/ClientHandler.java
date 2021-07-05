@@ -45,13 +45,16 @@ public class ClientHandler implements Runnable{
                 message = in.readLine();
                 
                     outToAll(message);
+                    
                 
             }
         }catch(IOException e){
             System.err.println(e.getStackTrace());
         }finally{
+            
             out.close();
             try {
+                
                 in.close();
             } catch (IOException ex) {
                 Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,6 +67,7 @@ public class ClientHandler implements Runnable{
             
             for(ClientHandler AClient : clients){
                 AClient.out.println(message);
+                out.flush();
         }
     }
     
