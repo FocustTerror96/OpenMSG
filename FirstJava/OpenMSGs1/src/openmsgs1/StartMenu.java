@@ -150,7 +150,7 @@ public class StartMenu extends javax.swing.JFrame {
                 }
             }
         }else{
-            jLabel3.setText("Please enter numbers");
+            jLabel3.setText("<html><font color='red'>Please enter numbers</font></html>");
             testFail--;
         }    
             
